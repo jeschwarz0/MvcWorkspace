@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContosoUniversity.DAL
+namespace MvcWorkspace.DAL
 {
     public class GenericRepository<TEntity> where TEntity : class
     {

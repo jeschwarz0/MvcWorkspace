@@ -1,31 +1,48 @@
-﻿using System;
+﻿using MvcWorkspace.Models;
+using System;
 
-namespace ContosoUniversity.DAL
+namespace MvcWorkspace.DAL
 {
     public class UnitOfWork : IDisposable
     {
         private MWContext context = new MWContext();
-        //todo: Fill this in with repositories
-       /* private GenericRepository<TType> Repository;
-
-        public GenericRepository<TType> Repository
+        #region Backing Repositories
+        private GenericRepository<YoutubeVideo> _youtubeVideo;
+        private GenericRepository<YoutubeChannel> _youtubeChannel;
+        #endregion
+        #region Repositories
+        public GenericRepository<YoutubeVideo> YoutubeVideo
         {
             get
             {
 
-                if (this.departmentRepository == null)
+                if (this._youtubeVideo == null)
                 {
-                    this.departmentRepository = new GenericRepository<Department>(context);
+                    this._youtubeVideo = new GenericRepository<YoutubeVideo>(context);
                 }
-                return departmentRepository;
+                return _youtubeVideo;
             }
         }
-        */
+
+        public GenericRepository<YoutubeChannel> YoutubeChannel
+        {
+            get
+            {
+
+                if (this._youtubeChannel == null)
+                {
+                    this._youtubeChannel = new GenericRepository<YoutubeChannel>(context);
+                }
+                return _youtubeChannel;
+            }
+        }
+        #endregion
+
         public void Save()
         {
             context.SaveChanges();
         }
-
+        #region Dispose
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)
@@ -45,5 +62,6 @@ namespace ContosoUniversity.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        #endregion
     }
 }
