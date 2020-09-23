@@ -3,7 +3,7 @@ using System;
 
 namespace MvcWorkspace.DAL
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable, IUnitOfWork
     {
         private MWContext context = new MWContext();
         #region Backing Repositories
@@ -11,6 +11,9 @@ namespace MvcWorkspace.DAL
         private GenericRepository<YoutubeChannel> _youtubeChannel;
         #endregion
         #region Repositories
+        /// <summary>
+        /// The Youtube Video repository
+        /// </summary>
         public GenericRepository<YoutubeVideo> YoutubeVideo
         {
             get
@@ -23,7 +26,9 @@ namespace MvcWorkspace.DAL
                 return _youtubeVideo;
             }
         }
-
+        /// <summary>
+        /// The Youtube Channel repository.
+        /// </summary>
         public GenericRepository<YoutubeChannel> YoutubeChannel
         {
             get
