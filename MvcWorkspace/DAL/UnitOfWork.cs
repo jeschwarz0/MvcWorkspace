@@ -7,14 +7,14 @@ namespace MvcWorkspace.DAL
     {
         private MWContext context = new MWContext();
         #region Backing Repositories
-        private GenericRepository<YoutubeVideo> _youtubeVideo;
-        private GenericRepository<YoutubeChannel> _youtubeChannel;
+        private IRepository<YoutubeVideo> _youtubeVideo;
+        private IRepository<YoutubeChannel> _youtubeChannel;
         #endregion
         #region Repositories
         /// <summary>
         /// The Youtube Video repository
         /// </summary>
-        public GenericRepository<YoutubeVideo> YoutubeVideo
+        public IRepository<YoutubeVideo> YoutubeVideo
         {
             get
             {
@@ -29,7 +29,7 @@ namespace MvcWorkspace.DAL
         /// <summary>
         /// The Youtube Channel repository.
         /// </summary>
-        public GenericRepository<YoutubeChannel> YoutubeChannel
+        public IRepository<YoutubeChannel> YoutubeChannel
         {
             get
             {
@@ -45,7 +45,8 @@ namespace MvcWorkspace.DAL
 
         public void Save()
         {
-            context.SaveChanges();
+            if(context != null)
+                context.SaveChanges();
         }
         #region Dispose
         private bool disposed = false;
